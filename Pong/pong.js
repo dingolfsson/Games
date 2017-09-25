@@ -190,7 +190,7 @@ let ballSpeedSlower = 0.5;
 // Annoying, eh? Feel free to remove the prompt and just manually
 // set the default score.
 let maxScore = parseInt(prompt("How many points points for a win?", 50), 10);
-
+(Number.isInteger(maxScore)) || (maxScore = 50);
 // ==================================
 //         KEYBOARD HANDLING
 // ==================================
