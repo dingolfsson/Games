@@ -87,7 +87,7 @@ let basic = ["#E6E6E6", "#297373", "#FF8552", "#39393A"];
 let gimp = ["#ADD9F4", "#984447", "#476C9B", "#468C98"];
 let pinky = ["#D81E5B", "#C6D8D3", "#FDF0D5", "#331832"];
 let colorPalette = pale;
-
+// TEST
 function loadColors() {
     g_canvas.style.background = colorPalette[0];
     //
@@ -701,7 +701,7 @@ function cheatMaster(cS) {
     // CANNON - kills player 2 on impact
     (cS === "BOOM") && (initCannon());
     // Player 1 Wins
-    (cS === "IWIN") && (g_paddle1.score = 50);
+    (cS === "IWIN") && (g_paddle1.score = maxScore);
     // Player 2 becomes invisible
     (cS === "MEYE" || cS === "MYEYES") && (theGogglesDoNothing());
     // Activates "Mini Me"
