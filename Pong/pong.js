@@ -44,8 +44,9 @@ of the first one.
 // ===================================================
 
 * Cheat Codes (Homing Missle, Canon, Blind, Inverse, Mini me etc.)
-* Score Canvas
+* Cheat Codes also change the color scheme live
 * Color Profiles
+* Score Canvas
 * More keys inputs
 * Reset function (lazy)
 * Winner Displayed at end
