@@ -90,7 +90,7 @@ let colorPalette = pale;
 
 function loadColors() {
     g_canvas.style.background = colorPalette[0];
-    
+    //
     let scoreScheme = g_scoreCtx.createLinearGradient(
         0, 0, g_canvas.width, g_score.height);
     
