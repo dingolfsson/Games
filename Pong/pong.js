@@ -97,9 +97,9 @@ function loadColors() {
     scoreScheme.addColorStop(0, colorPalette[3]);
     scoreScheme.addColorStop(0.5, colorPalette[3]);
     scoreScheme.addColorStop(0.5,colorPalette[2]);
-    scoreScheme.addColorStop(1,colorPalette[2]);
+    scoreScheme.addColorStop(1, colorPalette[2]);
 
-    g_scoreCtx.fillStyle=scoreScheme;
+    g_scoreCtx.fillStyle = scoreScheme;
 
     g_paddle1.color = colorPalette[1];
     g_minime.color = colorPalette[1];
