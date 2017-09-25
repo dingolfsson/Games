@@ -124,10 +124,10 @@ let basic = ["#E6E6E6", "#297373", "#FF8552", "#39393A"];
 let gimp = ["#ADD9F4", "#984447", "#476C9B", "#468C98"];
 let pinky = ["#D81E5B", "#C6D8D3", "#FDF0D5", "#331832"];
 let colorPalette = pale;
-// TEST
+
 function loadColors() {
     g_canvas.style.background = colorPalette[0];
-    //
+    
     let scoreScheme = g_scoreCtx.createLinearGradient(
         0, 0, g_canvas.width, g_score.height);
     
