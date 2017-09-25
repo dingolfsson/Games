@@ -5,6 +5,42 @@
 
 // ===================================================
 //
+//                       HTML
+//
+// ===================================================
+
+
+<canvas id="myCanvas" width="400" height="400" 
+style="border:1px solid black;">
+Sorry, your browser does not support the HTML5 canvas tag.
+</canvas>
+<canvas id="scoreCanvas" width="400" height="10" 
+style="border:0px solid black;">
+Sorry, your browser does not support the HTML5 canvas tag.
+</canvas>
+<!--<input name="keywords" type="text" id="keywords" size="5"> 
+
+<progress id="pro" value="0" max="100"><div class="progress-bar">
+<div>
+<span style="width: 80%;">Progress: 80%</span>
+</div>
+</progress>-->
+
+// ===================================================
+//
+//                       CSS
+//
+// ===================================================
+
+*{
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+text-shadow:none;
+text-rendering: optimizeLegibility;
+}
+
+// ===================================================
+//
 //              HOMEWORK REQUIREMENTS
 //
 // ===================================================
