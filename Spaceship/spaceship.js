@@ -127,18 +127,12 @@ window.addEventListener("mousemove", handleMouse);
 // Construct a "sprite" from the given `image`
 //
 function Sprite(image) {
-    /*
-    var that = {};
-    that.x = image.x;
-    that.y = image.y;
-    that.height = image.height;
-    that.offsetX = image.height / 2;
-    that.width = image.width;
-    that.offsetY = image.width / 2;
-    that.src = image.src;
-
-    return that;
-    */
+    this.cx = g_canvas.width / 2 - image.width / 2;
+    this.cy = g_canvas.height / 2 - image.height / 2;
+    this.width = image.width;
+    this.halfWidth = image.width / 2;
+    this.height = image.height;
+    this.halfHeight = image.height / 2;
     this.image = image;
 }
 
@@ -146,32 +140,25 @@ Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
 
     // This is how to implement default parameters...
     if (rotation === undefined) rotation = 0;
-    // YOUR STUFF HERE
-    // ...
     ctx.save();
-    ctx.translate(cy, cy);
-    ctx.rotate(rotation);
-    ctx.drawImage(this.image, -this.image.width/2, -this.image.height/2);
-	ctx.restore();
+    ctx.translate(cx, cy);
+    ctx.rotate(rotation * Math.PI / 180);
+    ctx.translate(-cx, -cy);
+    ctx.drawImage(this.image, this.cx, this.cy);
+    ctx.restore();
 };
 
 Sprite.prototype.drawWrappedCentredAt = function (ctx, cx, cy, rotation) {
 
     // HINT: You might want to implement a helper-function for part of this
 
-    // YOUR STUFF HERE
-    // ...
     if (rotation === undefined) rotation = 0;
-    
-    // YOUR STUFF HERE
-    // ...
-	var width = ctx.canvas.width;
-	var height = ctx.canvas.height;
-	for (var x = cx-width; x <= cx+width; x += width) {
-		for (var y = cy-height; y <= cy+height; y += height) {
-			this.drawCentredAt(ctx, x, y, rotation);
-		}
-	}
+
+    ctx.save();
+    ctx.rotation(rotation);
+    ctx.drawImage(this.image, this.cx, this.cy);
+    ctx.restore();
+
 };
 
 // ==========
@@ -300,10 +287,7 @@ Ship.prototype.wrapPosition = function () {
 Ship.prototype.render = function (ctx) {
 
     // NB: The preloaded ship sprite object is called `g_shipSprite`
-
-    // YOUR STUFF HERE
-    // ...
-    //ctx.
+    g_shipSprite.drawCentredAt(ctx, 200, 200);
 };
 
 // -------------------
