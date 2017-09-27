@@ -3,7 +3,7 @@
 ==================================
 Part 1: Implement a "Sprite" type.
 ==================================
-
+-
 OVERVIEW:
 
 Provide a constructor that takes an Image object defining the sprite,
