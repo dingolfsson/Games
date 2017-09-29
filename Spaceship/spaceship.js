@@ -112,8 +112,8 @@ function handleMouse(evt) {
     var x = evt.clientX - g_canvas.offsetLeft;
     var y = evt.clientY - g_canvas.offsetTop;
 
-    // YOUR STUFF HERE
-    // ...
+    g_ship.cx = x;
+    g_ship.cy = y;
 }
 
 // Handle "down" and "move" events the same way.
@@ -127,12 +127,6 @@ window.addEventListener("mousemove", handleMouse);
 // Construct a "sprite" from the given `image`
 //
 function Sprite(image) {
-    this.cx = g_canvas.width / 2 - image.width / 2;
-    this.cy = g_canvas.height / 2 - image.height / 2;
-    this.width = image.width;
-    this.halfWidth = image.width / 2;
-    this.height = image.height;
-    this.halfHeight = image.height / 2;
     this.image = image;
 }
 
@@ -144,7 +138,8 @@ Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
     ctx.translate(cx, cy);
     ctx.rotate(rotation * Math.PI / 180);
     ctx.translate(-cx, -cy);
-    ctx.drawImage(this.image, this.cx, this.cy);
+    ctx.drawImage(this.image, cx - this.image.width / 2, 
+                              cy - this.image.height / 2);
     ctx.restore();
 };
 
@@ -152,13 +147,10 @@ Sprite.prototype.drawWrappedCentredAt = function (ctx, cx, cy, rotation) {
 
     // HINT: You might want to implement a helper-function for part of this
 
+    // TODO
     if (rotation === undefined) rotation = 0;
-
-    ctx.save();
-    ctx.rotation(rotation);
-    ctx.drawImage(this.image, this.cx, this.cy);
-    ctx.restore();
-
+    ctx.translate(cx + 50);
+    
 };
 
 // ==========
@@ -212,7 +204,7 @@ Ship.prototype.computeGravity = function () {
 
     // If gravity is enabled, return the NOMINAL_GRAVITY value
     // See the "GAME-SPECIFIC DIAGNOSTICS" section for details.
-
+    // TODO:
     // YOUR STUFF HERE
     // ...
     // I'll just return zero, as a placeholder implementation
@@ -228,8 +220,8 @@ Ship.prototype.computeThrustMag = function () {
     // If retros are on, they provide NOMINAL_RETRO (a negative force)
     //
     // (NB: Both may be on simultaneously, in which case they combine.)
-
     // YOUR STUFF HERE
+    // TODO
     // ...
     // I'll just return zero, as a placeholder implementation
     return 0;
@@ -247,6 +239,7 @@ Ship.prototype.applyAccel = function (accelX, accelY, du) {
     // y-component of the velocity, and then reduce it by 10%
 
     // YOUR STUFF HERE
+    // TODO
     // ...
 };
 
@@ -281,13 +274,16 @@ Ship.prototype.wrapPosition = function () {
     // the bounds of the playfield.
     //
     // YOUR STUFF HERE
-    // ...
+    // TODO
+    if (g_ship.cx > g_canvas.width) {
+        g_ship.cx = 0;
+    }
 };
 
 Ship.prototype.render = function (ctx) {
 
     // NB: The preloaded ship sprite object is called `g_shipSprite`
-    g_shipSprite.drawCentredAt(ctx, 200, 200);
+    g_shipSprite.drawCentredAt(ctx, this.cx, this.cy);
 };
 
 // -------------------
@@ -404,6 +400,7 @@ function processDiagnostics() {
     // all three ships simulaneously.
 
     // YOUR STUFF HERE
+    // TODO
     // ...
 }
 
