@@ -111,7 +111,9 @@ function handleMouse(evt) {
 
     var x = evt.clientX - g_canvas.offsetLeft;
     var y = evt.clientY - g_canvas.offsetTop;
-
+    // YOUR STUFF HERE
+    // Couldn't think of another way of doing this as this is
+    // sufficient and works.
     g_ship.cx = x;
     g_ship.cy = y;
 }
@@ -127,30 +129,52 @@ window.addEventListener("mousemove", handleMouse);
 // Construct a "sprite" from the given `image`
 //
 function Sprite(image) {
+    // YOUR STUFF HERE
+    //this.src = image.src;
+    this.width = image.width;
+    this.height = image.height;
     this.image = image;
 }
 
 Sprite.prototype.drawCentredAt = function (ctx, cx, cy, rotation) {
 
+    // YOUR STUFF HERE
     // This is how to implement default parameters...
     if (rotation === undefined) rotation = 0;
     ctx.save();
     ctx.translate(cx, cy);
-    ctx.rotate(rotation * Math.PI / 180);
+    ctx.rotate(rotation);
     ctx.translate(-cx, -cy);
+    // I noticed image had a lot of objects, 
+    // this.image.width/height could be replaced with
+    // simple this.widht, this.height
     ctx.drawImage(this.image, cx - this.image.width / 2, 
                               cy - this.image.height / 2);
     ctx.restore();
 };
 
 Sprite.prototype.drawWrappedCentredAt = function (ctx, cx, cy, rotation) {
+    // YOUR STUFF HERE
+    var w = g_canvas.width;
+    var h = g_canvas.height;
 
     // HINT: You might want to implement a helper-function for part of this
-
-    // TODO
-    if (rotation === undefined) rotation = 0;
-    ctx.translate(cx + 50);
-    
+    // Far left upper
+    this.drawCentredAt(ctx, this.cx - w, this.cy - y, rotation);
+    // Far upper middle
+    this.drawCentredAt(ctx, this.cx, this.cy - y, rotation);
+    // Far right upper
+    this.drawCentredAt(ctx, this.cx + w, this.cy - y, rotation);
+    // Far left middle
+    this.drawCentredAt(ctx, this.cx - w, this.cy, rotation);
+    // Far right middle
+    this.drawCentredAt(ctx, this.cx + w, this.cy, rotation);
+    // Far left bottom
+    this.drawCentredAt(ctx, this.cx + w, this.cy + y, rotation);
+    // Far bottom middle
+    this.drawCentredAt(ctx, this.cx, this.cy + y, rotation);
+    // Far right bottom
+    this.drawCentredAt(ctx, this.cx - w, this.cy + y, rotation);
 };
 
 // ==========
@@ -202,12 +226,10 @@ var NOMINAL_GRAVITY = 0.12;
 
 Ship.prototype.computeGravity = function () {
 
+    // YOUR STUFF HERE
     // If gravity is enabled, return the NOMINAL_GRAVITY value
     // See the "GAME-SPECIFIC DIAGNOSTICS" section for details.
-    // TODO:
-    // YOUR STUFF HERE
-    // ...
-    // I'll just return zero, as a placeholder implementation
+    if (g_useGravity) return NOMINAL_GRAVITY;
     return 0;
 };
 
@@ -216,19 +238,20 @@ var NOMINAL_RETRO  = -0.1;
 
 Ship.prototype.computeThrustMag = function () {
 
+    // YOUR STUFF HERE
     // If thrusters are on, they provide NOMINAL_THRUST
     // If retros are on, they provide NOMINAL_RETRO (a negative force)
     //
     // (NB: Both may be on simultaneously, in which case they combine.)
-    // YOUR STUFF HERE
-    // TODO
-    // ...
-    // I'll just return zero, as a placeholder implementation
-    return 0;
+    var thrustMag = 0;
+    if (g_keys[this.KEY_THRUST]) thrustMag += NOMINAL_THRUST;
+    if (g_keys[this.KEY_RETRO]) thrustMag += NOMINAL_RETRO;
+    return thrustMag;
 };
 
 Ship.prototype.applyAccel = function (accelX, accelY, du) {
 
+    // YOUR STUFF HERE
     // Apply the given acceleration, over the specified period,
     // and compute the resulting velocity and displacement.
     //
@@ -238,9 +261,36 @@ Ship.prototype.applyAccel = function (accelX, accelY, du) {
     // The effect of the bounce should be to reverse the
     // y-component of the velocity, and then reduce it by 10%
 
-    // YOUR STUFF HERE
-    // TODO
-    // ...
+    var prevX = this.cx;
+    var prevY = this.cy;
+    var accelVelX = this.velX + accelX * du;
+    var accelVelY = this.velY + accelY * du;
+    var velMeanX = (this.velX + accelVelX) / 2;
+    var velMeanY = (this.velY + accelVelY) / 2;
+    var positionX = this.cx + velMeanX * du;
+    var positionY = this.cy + velMeanY * du;
+
+    this.velX = accelVelX;
+    this.velY = accelVelY;
+
+    this.cx = positionX;
+    this.cy = positionY;
+
+    // Boolean
+    // Name => wallsCollide
+    // Purpose => If the next location is smaller/greater than
+    // boarder (upper/lower) and the previous is within
+    // Make it bounce
+    var wallsCollide = (
+        (this.cy - g_shipSprite.height / 2 < 0 &&
+        prevY - g_shipSprite.height / 2 >= 0) ||
+        (this.cy + g_shipSprite.height / 2 > g_canvas.height &&
+        prevY + g_shipSprite.height / 2 <= g_canvas.height));
+   
+    if (wallsCollide && g_useGravity) {
+        this.velY *= -1;
+        this.velY *= 0.9;
+    }
 };
 
 Ship.prototype.reset = function () {
@@ -270,20 +320,30 @@ Ship.prototype.updateRotation = function (du) {
 
 Ship.prototype.wrapPosition = function () {
 
+    // YOUR STUFF HERE
     // Don't let the ship's centre-coordinates fall outside
     // the bounds of the playfield.
-    //
-    // YOUR STUFF HERE
-    // TODO
-    if (g_ship.cx > g_canvas.width) {
-        g_ship.cx = 0;
-    }
+    var leftBorder = this.cx - g_shipSprite.width / 2;
+    var rightBorder = this.cx + g_shipSprite.width / 2;
+    var topBorder = this.cy - g_shipSprite.height / 2;
+    var bottomBorder = this.cy - g_shipSprite.height / 2;
+
+    // Makes the spaceship always remain within the canvas
+    (leftBorder < 0 - g_shipSprite.width) && 
+        (this.cx += g_canvas.width + g_shipSprite.width);
+    (rightBorder > g_canvas.width + g_shipSprite.width) && 
+        (this.cx -= g_canvas.width + g_shipSprite.width);
+    (topBorder < 0 - g_shipSprite.height) && 
+        (this.cy += g_canvas.height + g_shipSprite.height);
+    (bottomBorder > g_canvas.height) && 
+        (this.cy -= g_canvas.height + g_shipSprite.height);
 };
 
 Ship.prototype.render = function (ctx) {
 
+    // YOUR STUFF HERE
     // NB: The preloaded ship sprite object is called `g_shipSprite`
-    g_shipSprite.drawCentredAt(ctx, this.cx, this.cy);
+    g_shipSprite.drawCentredAt(ctx, this.cx, this.cy, this.rotation);
 };
 
 // -------------------
@@ -391,6 +451,7 @@ var KEY_RESET = keyCode('R');
 
 function processDiagnostics() {
 
+    // YOUR STUFF HERE
     // Handle these simple diagnostic options,
     // as defined by the KEY identifiers above.
     //
@@ -399,9 +460,24 @@ function processDiagnostics() {
     // NB: The HALT and RESET behaviours should apply to
     // all three ships simulaneously.
 
-    // YOUR STUFF HERE
-    // TODO
-    // ...
+    // E => Toggle extra ships 
+    (eatKey(KEY_EXTRAS)) && (g_useExtras = !g_useExtras);
+    // G => Toggle gravity
+    (eatKey(KEY_GRAVITY)) && (g_useGravity = !g_useGravity);
+    // M => Toggle mixed
+    (eatKey(KEY_MIXED)) && (g_allowMixedActions = !g_allowMixedActions);
+    // H => Freezes ships
+    if (eatKey(KEY_HALT)) {
+        g_ship.halt();
+        g_extraShip1.halt();
+        g_extraShip2.halt();
+    }
+    // Returns to default positon
+    if (eatKey(KEY_RESET)) {
+        g_ship.reset();
+        g_extraShip1.reset();
+        g_extraShip2.reset();
+    }
 }
 
 // --------------------
