@@ -57,6 +57,7 @@
 - Properties (width, height, hitpoints, has powerup (bool), type of powerup
 - When hit, explode and fragments fall
 - Active => Boolean (or splice)
+- Some have shield that reflect shots
 
 **Sprites**
 - Spries for Powerups
