@@ -1,0 +1,4 @@
+function Bat(descr) {
+    // test
+    
+}
