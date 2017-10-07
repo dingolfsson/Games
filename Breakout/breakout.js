@@ -22,22 +22,53 @@ var g_ctx = g_canvas.getContext("2d");
 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
 */
 
-// ============
-// BAT (man)
-// ============
-
 var KEY_A = 'A'.charCodeAt(0);
 var KEY_D = 'D'.charCodeAt(0);
+var KEY_SPACE = ' '.charCodeAt(0);
+var g_keys = [];
 
-var g_bat = new Paddle({
-    cx : 30,
-    cy : 100,
+// Bat (paddle) initilized
+var g_bat = new Bat({
+    cx : g_canvas.width / 2,
+    cy : g_canvas.height - 25,
+    xVel : 5,
+    lives : 3,
 
     GO_LEFT   : KEY_A,
     GO_RIGHT  : KEY_D
 });
 
+var g_ballCount = 0;
+var g_ball = [];
+g_ball[0] = new Ball({
+    cx: 100,
+    cy: 400,
+    xVel: 5,
+    yVel: 4,
+    radius: 10
+});
 
+var bricksID = 0;
+var g_brick = [];
+var rows = 8;
+var cols = 10;
+
+// Bricks initilized (Array)
+for (var i = 0; i < cols; i++) {
+    for (var j = 0; j < rows; j++) {
+        // [1; 2]
+        var hitpoints = Math.floor(Math.random() * 3 + 1);
+        g_brick[bricksID] = new Brick({
+            cx: 30+(i*60),
+            cy: 12+(25*j),
+            hp: hitpoints,
+            alive: true,
+            id: bricksID,
+            arr: [i, j]
+        });
+        bricksID++;
+    }
+}
 // =============
 // GATHER INPUTS
 // =============
@@ -63,7 +94,12 @@ function gatherInputs() {
 
 function updateSimulation(du) {
     g_bat.update(du);
-    g_ball.update(du);
+    for (var i = 0; i < g_ball.length; i++) {
+        g_ball[i].update(du);
+    }
+    for (var i = 0; i < g_brick.length; i++) {
+        g_brick[i].update(du);
+    }
 }
 
 
@@ -82,8 +118,15 @@ function updateSimulation(du) {
 // GAME-SPECIFIC RENDERING
 
 function renderSimulation(ctx) {
-    g_ball.render(ctx);
-    g_ball.render(ctx);
+    g_bat.render(ctx);
+    for (var i = 0; i < g_ball.length; i++) {
+        g_ball[i].render(ctx);
+    }
+    for (var j = 0; j < g_brick.length; j++) {
+        if (g_brick[j].alive) {
+            g_brick[j].render(ctx);
+        }
+    }
 }
 
 // Kick it off
