@@ -56,7 +56,7 @@
 - Small ball => requires 2x man hits
 
 **Bricks**
-- 2D Arrays
+- 2D Arrays or 1D, pros/cons
 - Hits required (1 * row level)
 - Different color for rows
 - Properties (width, height, hitpoints, has powerup (bool), type of powerup
@@ -73,11 +73,14 @@
 - Sound for powerups
 - Monsterkill for 4 bricks killed in 4 seconds
 - Original Breakout sounds!
-- 8bit music
+- 8-bit music
 
 **Others**
+- LOADSCREEN!
+- Paddle speed bounce difference
+- Snowfall
 - Full size
 - Restart
-- Pause
-- Pause + 5px per click
+- DONE: Pause
+- DONE: Pause + 5px per click
 - Score 300, count down 1 per second
