@@ -22,12 +22,29 @@ var g_ctx = g_canvas.getContext("2d");
 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
 */
 
+// ================================================
+//              User Key Functions
+// A => Left
+// D => Right
+// SpaceBar => Tommy Gun
+// Enter => Cheat Prompter
+// ================================================
 var KEY_A = 'A'.charCodeAt(0);
 var KEY_D = 'D'.charCodeAt(0);
 var KEY_SPACE = ' '.charCodeAt(0);
+var KEY_ENTER = 13;
 var g_keys = [];
 
-// Bat (paddle) initilized
+// ================================================
+//                User Score
+// ================================================
+
+var score = 0;
+
+// ================================================
+//             Create the Paddle
+//      (can be made an array to allow 2P)
+// ================================================
 var g_bat = new Bat({
     cx : g_canvas.width / 2,
     cy : g_canvas.height - 25,
@@ -36,29 +53,49 @@ var g_bat = new Bat({
 
     GO_LEFT   : KEY_A,
     GO_RIGHT  : KEY_D,
-    GO_GOGADET: KEY_SPACE
+    GO_SPACE  : KEY_SPACE
 });
 
-var g_ballCount = 0;
+// ================================================
+//            Create the Ball(s)
+//     The Idea was to Create Many Balls Powerup
+// ================================================
+
 var g_ball = [];
 g_ball[0] = new Ball({
-    cx: 100,
-    cy: 400,
+    cx: 200,
+    cy: 200,
     xVel: 5,
     yVel: 4,
     radius: 6
 });
 
+// ================================================
+//            Create the Bricks Array
+//       Better explaination why I went within
+//          1D array instead of 2D array
+// ================================================
+
 var bricksID = 0;
 var g_brick = [];
 var rows = 10;
 var cols = 12;
+
+// ================================================
+//            Color Scheme for Bricks
+// ================================================
 var brickColors = ["#D35F5F",
 "#D39061", "#CEC35F", "#A0CC5F", "#5EC96B", "#5EC9AC",
 "#5CA8C4", "#5962BF", "#8558BC", "#BC58B4", "#BA5773",
 "#4EE06E", "#E2D66A","#CE77D8", "#7AAADD"]
 
 // Bricks initilized (Array)
+// I used a single dimensional array for few reasons
+// 1. I forgot a if statement for the collition so I had to
+//  write the 60% code again.. funtimes.
+// 2. I have a 2D 'properties' on the single dimensional Array
+// 3. I had my midterms last week, I got in total 2 days to write the
+//    entire thing, I wrote what I knew would work flawlessly-ish.
 for (var i = 0; i < rows; i++) {
     for (var j = 0; j < cols; j++) {
         var hitpoints = Math.floor(Math.random() * 0 + 1);
@@ -76,6 +113,7 @@ for (var i = 0; i < rows; i++) {
         bricksID++;
     }
 }
+
 // =============
 // GATHER INPUTS
 // =============
@@ -106,7 +144,7 @@ function updateSimulation(du) {
     }
     for (var i = 0; i < g_brick.length; i++) {
         g_brick[i].update(du);
-    }
+    };
 }
 
 

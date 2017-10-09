@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
         <title>Breakout</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
     </head>
     <body id="body">
         <div id="overlay">
@@ -11,7 +13,8 @@
             <h1>Loading..</h1>
         </div>
 
-        <img id="img" src="media/images/logo.png"/>
+        <img id="img"
+        src="https://notendur.hi.is/dai5/Breakout/media/Images/logo.png"/>
 
         <div id="startgame" class="gameFrame">
             <canvas id="myCanvas" width="600" height="450"
@@ -19,7 +22,30 @@
                 Sorry, but your browser does not support the HTML5 canvas tag.
             </canvas>
         </div>
-        <img id="img" src="media/images/danielingolfsson.png"/>
+
+        <img id="img"
+        src="https://notendur.hi.is/dai5/Breakout/media/Images/danielingolfsson.png"/>
+
+        <div>
+            <h4>Your objective is to destroy all the bricks</h4>
+            <h4>Lefty => A ~ Righty => D</h4>
+            <h4>Tommy Gun => Spacebar</h4>
+            <h4>Cheats (Activate with Enter)</h4>
+            <h4>Bigger => Bat becomes bigger and faster</h4>
+            <h4>Batman => Batman motivation</h4>
+            <h4>TommyGun => Shoots bullets</h4>
+            <h4>Hardcore => Difficulty increased</h4>
+        </div>
+
+        <div>
+            <h4>CREDIT</h4>
+            <h4>Song: Eugene (https://www.youtube.com/user/ETDBEATS)</h4>
+            <h4>Audio Effect: Team 17 / Apogee Software / Warner Bros. Pictures</h4>
+            <h4>Audio Convertion: http://online-audio-converter.com/</h4>
+            <h4>Logo: https://textcraft.net/</h4>
+        </div>
+
+        <script src="cheats.js"></script>
         <script src="loading.js"></script>
         <script src="utils.js"></script>
         <script src="g_keys.js"></script>
@@ -30,8 +56,9 @@
         <script src="update.js"></script>
         <script src="render.js"></script>
         <script src="breakout.js"></script>
-        <script id="__bs_script__">//<![CDATA[
+        <!-- For Local trials -->
+        <!--<script id="__bs_script__">//<![CDATA[
         document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.13'><\/script>".replace("HOST", location.hostname));
-    //]]></script>
+    //]]></script>-->
     </body>
 </html>

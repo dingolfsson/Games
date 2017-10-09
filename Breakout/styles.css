@@ -6,6 +6,11 @@ body {
     animation: BackgroundGradient 30s ease infinite;
 }
 
+h4 {
+    text-align: center;
+    color: white;
+}
+
 -webkit-animation: BackgroundGradient 30s ease infinite;
 -moz-animation: BackgroundGradient 30s ease infinite;
 animation: BackgroundGradient 30s ease infinite;

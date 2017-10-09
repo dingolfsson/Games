@@ -4,11 +4,11 @@
 - Max W. Space => https://www.youtube.com/watch?v=IerQ5M9p4YY
 -
 
-**Bat**
+SKIPPED: **Bat**
 - On left side from right direction
 - On right side from left diraction
 
-**Powerups** => One activate of each type
+SKIPPED: **Powerups** => One activate of each type
 - +1 Life
 - +20px paddle
 - Sticky Ball
@@ -27,63 +27,66 @@
 - 2 Lasers
 - Activate more balls (dont lose lives)
 
-**Powerdowns**
+SKIPPED: **Powerdowns**
 - Smaller paddle
 - Slower paddle
 - -1 life
 - Gamer over
 
 **Game won**
-- Buy powerups using points
+- SKIPPED: Buy powerups using points
 
 **Cheats**
-- rosebud => to activate cheats
-- Shooter => Shoots the ball, making it change diraction
-- Bomber mode => Screen shakes when balls hit bricks
-- I can see!!
-- Give balls tails
+- SKIPPED: rosebud => to activate cheats
+- DONE: LAZER
+- DONE: TommyGun
+- DONE: Make Bat Bigger
+- SKIPPED: Shooter => Shoots the ball, making it change diraction
+- SKIPPED: Bomber mode => Screen shakes when balls hit bricks
+- SKIPPED: I can see!!
+- SKIPPED: Give balls tails
 
 **Change themes**
-- Like in Pong
-- Different forms / levels
-- Idestructable bricks
-- On top "HIGH SCORE" => Score below
-- ON top left "x UP" => Lives remaining
+- SKIPPED: Like in Pong
+- SKIPPED: Different forms / levels
+- SKIPPED: Idestructable bricks
+- DONE: On top "HIGH SCORE" => Score below
+- DONE: ON top left "x UP" => Lives remaining
 - When game is over, show credit and another song!
 
 **Balls**
-- Big ball => one shots all
-- Small ball => requires 2x man hits
+- SKIPPED: Big ball => one shots all
+- SKIPPED: Small ball => requires 2x man hits
 
 **Bricks**
-- 2D Arrays or 1D, pros/cons
-- Hits required (1 * row level)
-- Different color for rows
-- Properties (width, height, hitpoints, has powerup (bool), type of powerup
-- When hit, explode and fragments fall
-- Active => Boolean (or splice)
-- Some have shield that reflect shots
+- DONE: 2D Arrays or 1D, pros/cons
+- SKIPPED: Hits required (1 * row level)
+- DONE: Different color for rows
+- DONE: Properties (width, height, hitpoints, has powerup (bool), type of powerup
+- SKIPPED: When hit, explode and fragments fall
+- SKIPPED: Active => Boolean (or splice)
+- SKIPPED: Some have shield that reflect shots
 
 **Sprites**
 - Spries for Powerups
 - Sprites for background
 
 **Sounds**
-- *boop* for hits
-- Sound for powerups
+- DONE: *boop* for hits
+- DONE: Sound for powerups
 - Monsterkill for 4 bricks killed in 4 seconds
-- Original Breakout sounds!
-- 8-bit music
+- DONE: Background!
+- DONE: 8-bit music
 
 **Others**
-- LOADSCREEN!
+- DONE: LOADSCREEN!
 - Paddle speed bounce difference
 - Snowfall
 - Full size
 - Restart
 - DONE: Pause
 - DONE: Pause + 5px per click
-- Score 300, count down 1 per second
+- DONE: Score
 
 **Credit**
 - https://textcraft.net/

@@ -1,15 +1,23 @@
+// Function:  Bat (constructor)
+// Parameter: descr
+// Action:    Creates balls with given values
 function Bat(descr) {
     for (var property in descr) {
         this[property] = descr[property];
     }
 }
 
+// ================================================
+//             Initilized values
+// ================================================
+
 Bat.prototype.halfWidth = 40;
 Bat.prototype.halfHeight = 7;
+Bat.prototype.score = 0;
 
-// ================
-// Update
-// ================
+// ================================================
+//             Update Function
+// ================================================
 
 Bat.prototype.update = function (du) {
     if (g_keys[this.GO_LEFT] &&
@@ -21,19 +29,31 @@ Bat.prototype.update = function (du) {
     }
 };
 
-// ================
-// Render
-// ================
+// ================================================
+//             Render Function
+// ================================================
+
 Bat.prototype.render = function (ctx) {
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Lives: " + this.lives, 0, 15);
+    ctx.fillText("Score: " + this.score, g_canvas.width / 2 - 40, 15);
+    if (this.lives === -1) {
+        ctx.fillText("You lost! ",
+        g_canvas.width / 2 - 30, g_canvas.height / 2);
+        ctx.fillText("You score: " + this.score,
+        g_canvas.width / 2 - 50, g_canvas.height / 2 + 30);
+    }
     ctx.fillRect(this.cx - this.halfWidth,
                 this.cy - this.halfHeight,
                 this.halfWidth * 2,
                 this.halfHeight * 2);
 };
 
-// ================
-// Collides with
-// ================
+// ================================================
+//             Collition Function
+// ================================================
+
 Bat.prototype.collidesWith = function (prevX, prevY, nextX, nextY, r) {
     let xLeftEdge = this.cx - (this.halfWidth / 2);
     let xRightEdge = this.cx + (this.halfWidth / 2);
