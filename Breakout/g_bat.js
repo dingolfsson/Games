@@ -4,8 +4,8 @@ function Bat(descr) {
     }
 }
 
-Bat.prototype.halfWidth = 50;
-Bat.prototype.halfHeight = 10;
+Bat.prototype.halfWidth = 40;
+Bat.prototype.halfHeight = 7;
 
 // ================
 // Update
@@ -35,21 +35,25 @@ Bat.prototype.render = function (ctx) {
 // Collides with
 // ================
 Bat.prototype.collidesWith = function (prevX, prevY, nextX, nextY, r) {
-    var paddleEdge = this.cy-this.halfHeight;
+    let xLeftEdge = this.cx - (this.halfWidth / 2);
+    let xRightEdge = this.cx + (this.halfWidth / 2);
+    let yUpperEdge = this.cy - (this.halfHeight / 2);
+    let yLowerEdge = this.cy + (this.halfHeight / 2);
 
-    if ((nextY - r < paddleEdge && prevY - r >= paddleEdge) ||
-        (nextY + r > paddleEdge && prevY + r <= paddleEdge)) {
+    if ((nextY - r < yUpperEdge && prevY - r >= yUpperEdge) ||
+        (nextY + r > yUpperEdge && prevY + r <= yUpperEdge)) {
         if (nextX + r >= this.cx - this.halfWidth &&
             nextX - r <= this.cx + this.halfWidth) {
             return true;
         }
     }
-    if ((nextX - r < this.cx+this.halfWidth && prevX - r >= this.cx+this.halfWidth) ||
-        (nextX + r > this.cx-this.halfWidth && prevX + r <= this.cx-this.halfWidth)) {
-        if (nextY + r >= this.cy - this.halfHeight+5 &&
-            nextY - r <= this.cy + this.halfHeight-5) {
+    if ((nextX - r <= xRightEdge && prevX - r >= xRightEdge) ||
+        (nextX + r >= xLeftEdge && prevX + r <= xLeftEdge)) {
+        if ((nextY + r >= this.cy - this.halfHeight) &&
+            (nextY - r <= this.cy + this.halfHeight)) {
             return true;
         }
     }
+
     return false;
 };

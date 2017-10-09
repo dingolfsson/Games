@@ -19,27 +19,38 @@ Ball.prototype.update = function (du) {
         this.yVel *= -1;
     }
 
-    if (nextY - this.radius < 0 ||                             // top edge
-          (nextY > g_canvas.height)){
-        this.yVel *= -1;
+    if (nextY - (Math.floor(this.yVel) / 2) <= this.radius ||
+        (nextY > g_canvas.height - this.radius))
+    {
+            this.yVel *= -1;
     }
-    if(nextX - this.radius < 0 ||
-        (nextX + this.radius > g_canvas.width)) {               // sides edge
+
+    if (nextX - (Math.floor(this.xVel) / 2) <= this.radius ||
+        nextX > g_canvas.width - this.radius)
+    {
         this.xVel *= -1;
     }
 
-    for(var i=0; i<g_brick.length; i++){
+
+    for(var i = 0; i < g_brick.length; i++){
 
         if (g_brick[i].collidesWithY(prevX, prevY, nextX, nextY, this.radius)){
-            this.yVel *= -1;
-            console.log(g_brick[i].hp);
-            g_brick[i].alive = false;
-            g_brick[i].disappearY = true;
+            console.log("Brick CY: " + g_brick[i].cy);
+            if (prevY > nextY) {
+                console.log("Bigger Prev = PrevY: " + prevY);
+                console.log("Bigger Prev = NextY: " + nextY);
+                this.yVel *= -1;
+            } else {
+                console.log("Bigger Next = PrevY: " + prevY);
+                console.log("Bigger Next = NextY: " + nextY);
+                this.xVel *= -1;
+            }
         }
         if (g_brick[i].collidesWithX(prevX, prevY, nextX, nextY, this.radius)){
-            this.yVel *= -1;
-            g_brick[i].alive = false;
-            g_brick[i].disappearX = true;
+            console.log("Brick CX: " + g_brick[i].cx);
+            if (prevX > nextX) {
+                this.xVel *= -1;
+            }
         }
 
     }

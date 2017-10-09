@@ -35,7 +35,8 @@ var g_bat = new Bat({
     lives : 3,
 
     GO_LEFT   : KEY_A,
-    GO_RIGHT  : KEY_D
+    GO_RIGHT  : KEY_D,
+    GO_GOGADET: KEY_SPACE
 });
 
 var g_ballCount = 0;
@@ -45,23 +46,29 @@ g_ball[0] = new Ball({
     cy: 400,
     xVel: 5,
     yVel: 4,
-    radius: 10
+    radius: 6
 });
 
 var bricksID = 0;
 var g_brick = [];
-var rows = 8;
-var cols = 10;
+var rows = 10;
+var cols = 12;
+var brickColors = ["#D35F5F",
+"#D39061", "#CEC35F", "#A0CC5F", "#5EC96B", "#5EC9AC",
+"#5CA8C4", "#5962BF", "#8558BC", "#BC58B4", "#BA5773",
+"#4EE06E", "#E2D66A","#CE77D8", "#7AAADD"]
 
 // Bricks initilized (Array)
-for (var i = 0; i < cols; i++) {
-    for (var j = 0; j < rows; j++) {
-        // [1; 2]
-        var hitpoints = Math.floor(Math.random() * 3 + 1);
+for (var i = 0; i < rows; i++) {
+    for (var j = 0; j < cols; j++) {
+        var hitpoints = Math.floor(Math.random() * 0 + 1);
+        var hitpoints = 1;
         g_brick[bricksID] = new Brick({
-            cx: 30+(i*60),
-            cy: 12+(25*j),
+            cx: 25+(j*50),
+            cy: 30+(18*i),
             hp: hitpoints,
+            color: brickColors[i],
+            powerup: Math.floor(Math.random() * 10 + 1),
             alive: true,
             id: bricksID,
             arr: [i, j]

@@ -4,20 +4,18 @@ function Brick(descr) {
     }
 }
 
-Brick.prototype.halfWidth = 28;
-Brick.prototype.halfHeight = 10;
+Brick.prototype.halfWidth = 24;
+Brick.prototype.halfHeight = 7;
 Brick.prototype.alive = true;
-Brick.prototype.powerup = false;
 
 // Render
 Brick.prototype.render = function (ctx) {
-
-    if (this.alive) {
+    ctx.fillStyle = this.color;
     ctx.fillRect(this.cx - this.halfWidth,
                  this.cy - this.halfHeight,
                  this.halfWidth * 2,
                  this.halfHeight * 2);
-    }
+
 };
 
 Brick.prototype.collidesWithY = function (prevX, prevY,
@@ -28,7 +26,11 @@ Brick.prototype.collidesWithY = function (prevX, prevY,
         if (nextX + r >= this.cx - this.halfWidth &&
             nextX - r <= this.cx + this.halfWidth) {
                 if (this.alive) {
-                    this.alive = false;
+                    this.hp--;
+                    if (this.hp < 1) {
+                        this.alive = false;
+                    }
+                    console.log(this.powerup);
                     return true;
                 }
             }
@@ -41,19 +43,22 @@ Brick.prototype.collidesWithX = function (prevX, prevY,
                                           r) {
     if ((nextX - r < this.cx+this.halfWidth && prevX - r >= this.cx+this.halfWidth) ||
         (nextX + r > this.cx-this.halfWidth && prevX + r <= this.cx-this.halfWidth)) {
-        if (nextY + r >= this.cy - this.halfHeight+5 &&
-            nextY - r <= this.cy + this.halfHeight-5) {
+        if (nextY + r >= this.cy - this.halfHeight &&
+            nextY - r <= this.cy + this.halfHeight) {
                 if (this.alive) {
-                    this.alive = false;
+                    this.hp--;
+                    if (this.hp < 1) {
+                        this.alive = false;
+                    }
+                    console.log(this.powerup);
                     return true;
                 }
+
             }
         }
     return false;
 };
 
 Brick.prototype.update = function (du) {
-    if (this.powerup) {
-        console.log("Brick has a powerup");
-    }
+
 };

@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="styles.css">
-        <title>Breakout</title>
-    </head>
-    <body id="body">
+<template>
+  <h1>Hello World!</h1>
+  <!-- Img is not requested until the <template> goes live. -->
         <div id="overlay">
             <div class="spinner"></div>
             <h1>Loading..</h1>
@@ -14,12 +11,12 @@
         <img id="img" src="media/images/logo.png"/>
 
         <div id="startgame" class="gameFrame">
-            <canvas id="myCanvas" width="600" height="450"
-            style="border: 1px solid white;">
+            <canvas id="myCanvas" width="600" height="600"
+            style="border: 1px solid black;">
                 Sorry, but your browser does not support the HTML5 canvas tag.
             </canvas>
         </div>
-        <img id="img" src="media/images/danielingolfsson.png"/>
+
         <script src="loading.js"></script>
         <script src="utils.js"></script>
         <script src="g_keys.js"></script>
@@ -33,5 +30,5 @@
         <script id="__bs_script__">//<![CDATA[
         document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.13'><\/script>".replace("HOST", location.hostname));
     //]]></script>
-    </body>
+</template>
 </html>

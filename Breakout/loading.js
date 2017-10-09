@@ -1,8 +1,8 @@
 var overlay = document.getElementById("overlay");
+var audio = new Audio('media/Audio/EugeneTheDream-HitThatSuperMario.mp3');
 
 window.addEventListener('load', function(){
   overlay.style.display = 'none';
 })
 
-var audio = new Audio('media/EugeneTheDream-HitThatSuperMario.mp3');
-audio.play();
+//audio.play();
